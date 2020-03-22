@@ -6,3 +6,16 @@ Use the power of AI to help monitor your loved ones. This simple site allows you
 
 
 # Screenshots
+![AI Nanny](http://marktolson.github.io/ai-nanny/nanny1.gif)
+
+
+# How To Setup
+1. Install [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam&hl=en_AU) or another cam streaming app that can encode to the MJPEG format.
+
+2. Obtain the cam stream URL of the video from the app (example: http://192.168.1.20:8080/video)
+
+3. Go to [this site](https://marktolson.github.io/ai-nanny/)
+
+4. Enter the streaming url from the IP Camera app.
+
+5. Click the 'Add' button.
