@@ -6,6 +6,7 @@ This simple site allows you to connect multiple live streams using your old phon
 
 [Click here to use the site](https://marktolson.github.io/ai-nanny/)
 
+Feel free to do as you wish with the code. It's very easy to modify to monitor animals / pets and other objects. It's also very poorly written, I was tired and just needed a solution by the time my child woke up from her nap!
 
 # Screenshots
 ![AI Nanny](http://marktolson.github.io/ai-nanny/nanny1.gif)
