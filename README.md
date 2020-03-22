@@ -19,3 +19,7 @@ Use the power of AI to help monitor your loved ones. This simple site allows you
 4. Enter the streaming url from the IP Camera app.
 
 5. Click the 'Add' button.
+
+6. Once all cams have been added, click the 'START MONITORING' button.
+
+* For best results reduce the stream resolution in th IP Camera app to around 640px wide.
