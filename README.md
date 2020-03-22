@@ -14,7 +14,7 @@ This simple site allows you to connect multiple live streams using your old phon
 # How To Setup
 1. Grab some old phones and install [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam&hl=en_AU) or another cam streaming app that can encode to the MJPEG format.
 
-2. Obtain the cam stream URL of the video from the app (example: http://192.168.1.20:8080/video) NOTE: that you'll need to append the '/video' to the end of the url if using the IP Camera app. 
+2. Obtain the cam stream URL of the video from the app (example: http://192.168.1.20:8080/video) NOTE: You'll need to append the '/video' to the end of the URL if using the IP Camera app. 
 
 3. Go to [this site](https://marktolson.github.io/ai-nanny/)
 
