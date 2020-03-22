@@ -64,9 +64,11 @@
     document.getElementById("loader").style.visibility = "hidden";
   });
 
-  if (!confirm("WARNING: Use this software at your own risk. It is not effective as a replacement for an actual supervisor / carer. By accepting this agreement you are agreeing that the author is in no way responsible for any damamges caused as a result of using on this software.")) {
-    window.location = "https://pulsesoftware.com"
-  }
+  setTimeout(function(){ 
+    if (!confirm("WARNING: Use this software at your own risk. It is not effective as a replacement for an actual supervisor / carer. By accepting this agreement you are agreeing that the author is in no way responsible for any damamges caused as a result of using on this software.")) {
+      window.location = "https://pulsesoftware.com"
+    }
+  }, 1000);
 
   loadFromLocalStorage();
 
