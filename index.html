@@ -1,0 +1,157 @@
+<!-- This is terrible, terrible code. Please do not judge me. -->
+<html>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+<style>
+  .section {
+    margin: 20px;
+  }
+
+  #camUrl {
+    width: 300px;
+    margin: 0 0 0 20px;
+  }
+
+  .camView {
+    -webkit-user-select: none;
+    margin: auto;
+    float:left;
+  }
+</style>
+<body>
+  <div id="app">
+    <div id="addCamContainer" class="section">
+      Add Webcam (URL)<input id="camUrl" type="text" placeholder="example http://192.168.1.22:8080/video"/>
+      <button onclick="addCamClicked()">Add</button>
+    </div>
+    <div id="camContainer" class="section">
+        
+    </div>
+    <div style="clear: both"></div>
+    <div class="section">
+        <span id="output"></span>
+    </div>
+    <div class="section">
+      <div id="loader">
+        Please wait while the AI model loads...
+      </div>
+      <button id="btnStart" onclick="testVid()">START MONITORING</button>
+    </div>
+    <div class="section">
+      <button id="btnClear" onclick="clearCams()">RESET</button>
+    </div>
+  </div>
+</body>
+<script>
+  var cams = [];
+  var camIndex = 0;
+  var totalFound;
+  var img = null;
+  var cocoModel = null;
+  var output = document.getElementById('output');
+  var self = this;
+  document.getElementById("btnStart").style.visibility = "hidden";
+
+  // Load the model.
+  cocoSsd.load().then(model => {
+    cocoModel = model
+
+    console.log('model loaded')
+    document.getElementById("btnStart").style.visibility = "visible";
+    document.getElementById("loader").style.visibility = "hidden";
+  });
+
+  loadFromLocalStorage();
+
+  function loadFromLocalStorage() {
+    let camsString = localStorage.getItem("cams");
+    if (camsString) {
+      cams = JSON.parse(camsString);
+      cams.map(x => {
+        addCam(x.url, x.id);
+      })
+    }
+  }
+  
+  function addCamClicked() {
+    var camUrl = document.getElementById("camUrl").value;
+    console.log(camUrl);
+    addCam(camUrl);
+  }
+
+  function addCam(camUrl, camId) {
+    if (!camUrl || camUrl.length === 0) {
+      alert("Enter a valid MPJEG URL");
+      return;
+    }
+
+    var camView = document.createElement("div");
+    camView.setAttribute("class", "camView");
+    var imgNode = document.createElement("img");
+    imgNode.setAttribute("src", camUrl);
+    imgNode.setAttribute("crossorigin", "anonymous");
+
+    if (!camId || camId === "") {
+      imgNode.setAttribute("id", "img" + cams.length);
+    } else {
+      imgNode.setAttribute("id", camId);
+    }
+    
+    camView.appendChild(imgNode);
+    document.getElementById("camContainer").appendChild(camView);
+    document.getElementById("camUrl").value = "";
+
+    if (cams.filter(x => {return x.url == camUrl}).length === 0) {
+      cams.push({ id: "img" + cams.length, url: camUrl, found: 0 });
+    }
+    
+    updateLocalStorage();
+  }
+
+  function clearCams() {
+    cams = [];
+    updateLocalStorage();
+    window.location.reload(false); 
+  }
+
+  function updateLocalStorage() {
+    localStorage.setItem("cams", JSON.stringify(cams));
+  }
+
+  function testVid() {
+      var self = this;
+      document.getElementById("btnStart").style.visibility = "hidden";
+
+      if (camIndex === 0) {
+        totalFound = 0;
+      }
+
+      img = document.getElementById('img' + camIndex);
+
+      cocoModel.detect(img).then(predictions => {
+          if (predictions) {
+            self.cams[self.camIndex].found = predictions.filter(x => {return x.class == "person"}).length;
+          } else {
+            self.cams[self.camIndex].found = 0;
+          }
+
+          self.totalFound += self.cams[self.camIndex].found;
+
+          if (self.camIndex === self.cams.length - 1) {
+            self.camIndex = 0;
+            output.innerHTML = (self.totalFound > 0) ? "People detected" : "WHERE DA BABY AT???"
+            if (self.totalFound === 0) {
+              document.body.style.backgroundColor = "#ffc1b5";
+            } else {
+              document.body.style.backgroundColor = "white";
+            }
+          } else {
+            self.camIndex++;
+          }
+
+          setTimeout(self.testVid, 10);
+      });
+  }
+</script>
+
+</html>
