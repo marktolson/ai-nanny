@@ -2,7 +2,7 @@
 
 Use the power of AI to help monitor your kidlets during the Coronavirus isolation period. 
 
-This simple site allows you to connect multiple live streams using your old phones, then utilises machine learning models (COCO SSD mobilenet & tensorflow lite) to detect the presence of people appearing in the streams. When no people are detected in all views (ie. your baby is no longer visible to any camera), the page requests you attention. There is nothing to install, just click the link below and add your cam streams.
+This simple site allows you to connect multiple live streams using your old phones, then utilises machine learning models (COCO SSD mobilenet & tensorflow lite) to detect the presence of people appearing in the streams. When no people are detected in all views (ie. your baby is no longer visible to any camera), the page requests your attention. There is nothing to install, just click the link below and add your cam streams.
 
 **[Click here to use the site](https://marktolson.github.io/ai-nanny/)**
 
