@@ -128,6 +128,11 @@
   }
 
   function testVid() {
+      if (cams.length === 0) {
+        alert("Add a cam first.");
+        return;
+      }
+
       var self = this;
       document.getElementById("btnStart").style.visibility = "hidden";
 
